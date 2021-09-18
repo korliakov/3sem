@@ -102,31 +102,31 @@ int main(int argc, const char * argv[]) {
 
     
     DiscreteState d(5);
-    SegmentState s(0,10);
+    SegmentState s(0,4);
     SetState ss({1, 3, 5, 7, 23, 48, 57, 60, 90, 99});
     
 
     std::ofstream out;          
-    out.open("Discrete1.txt");
-    for (int i = 1; i != 1000000000; i*= 10) {
-        ProbabilityTest pt(10,0,100, i);
+    out.open("Discrete2.txt");
+    for (int i = 1; i < 101; i+=1) {
+        ProbabilityTest pt(9,0,i, 10000);
         out << i << " , " << pt(d) << std::endl;
     }
     out.close();
     
     std::cout << "1 тест готов" << std::endl;
 
-    out.open("Segment1.txt");
-    for (int i = 1; i != 1000000000; i*= 10) {
-        ProbabilityTest pt(10,0,100, i);
+    out.open("Segment2.txt");
+    for (int i = 1; i < 101; i+=1) {
+        ProbabilityTest pt(9 ,0,i, 10000);
         
         out << i << " , " << pt(s) << std::endl;
     }
     out.close();
     std::cout << "2 тест готов" << std::endl;
-    out.open("Set1.txt");
-    for (int i = 1; i != 1000000000; i*=10) {
-        ProbabilityTest pt(10,0,100, i);
+    out.open("Set2.txt");
+    for (int i = 1; i < 101; i+=1) {
+        ProbabilityTest pt(9 ,0,i, 10000);
         out << i << " , " << pt(ss) << std::endl;
     }
     out.close();
