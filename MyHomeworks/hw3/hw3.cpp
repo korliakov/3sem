@@ -13,6 +13,18 @@ public:
 
     }
 
+    Grid (const Grid &grid): x_size(grid.x_size), y_size(grid.y_size)
+    {
+        memory = new T[x_size*y_size];
+
+        for (size_t i=0; i < grid.x_size*grid.y_size; i++) {
+
+            this->memory[i] = grid.memory[i];
+        }
+
+
+        std::cout << "Copy constructor worked here!\n";
+    }
 
 
     ~Grid() {
@@ -37,20 +49,20 @@ public:
     }
 
 
+    T& operator()(size_t x_idx, size_t y_idx)
 
-
-
-    Grid<T>& operator()(size_t x_idx, size_t y_idx, T num) { //ошибка
+    {
         size_t a;
-        
+
         if (y_idx > 1) {a = x_idx + x_size*(y_idx-1) -1;}
 
         else {a = x_idx -1;}
 
-        memory[a] = num;
         
-        return *this;
+        return memory[a];
     }
+
+
 
     size_t get_xsize() const {
 
@@ -72,6 +84,21 @@ public:
         
         return *this;
     }
+
+    Grid& operator=(const Grid& grid) {
+
+        x_size = grid.x_size;
+        x_size = grid.x_size;
+        memory = new T[x_size*y_size];
+
+        for (size_t i=0; i < grid.x_size*grid.y_size; i++) {
+
+            this->memory[i] = grid.memory[i];
+        }
+
+        return *this;
+    }
+
 
     template <typename U>
     friend std::ostream& operator<<(std::ostream &out, const Grid<U> &grid);
@@ -118,10 +145,11 @@ int main() {
 
     Grid<int> grid(2, 2);
     grid = 5;
-    size_t x_size = grid.get_xsize();
+    Grid<int> g(grid);
 
-    grid(1, 1, 1);
-    std::cout << grid;
+    grid(1, 1) = 1;
+    grid(2,2) = 22;
+    std::cout << g;
 
 
 }
