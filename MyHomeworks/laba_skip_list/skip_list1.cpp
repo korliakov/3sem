@@ -190,8 +190,3 @@ int main() {
 	s.print_list();
 
 }
-
-
-
-
-
